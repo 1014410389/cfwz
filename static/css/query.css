@@ -1,0 +1,213 @@
+@charset "UTF-8";
+
+.signup_container {
+    margin: 10px;
+    width: 1180px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 50px;
+    padding-top: 35px;
+    box-sizing: border-box;
+    height: 587px;
+}
+
+.exam_domestic,
+.exam_foreign {
+    float: left;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.separate {
+    float: left;
+    height: 18px;
+    width: 2px;
+    background: #ADADAD;
+    margin: 8px 6px 0 6px;
+}
+
+.exam_change {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.e_selected {
+    font-weight: bold;
+    color: red;
+    border-bottom: 3px solid red;
+}
+
+.exam_content {
+    width: 100%;
+    height: 100%;
+}
+
+.domestic_content,
+.foreign_content {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+}
+
+.e_hide {
+    display: none;
+}
+
+
+/*------------------国内选项卡------------------*/
+.et_left {
+    float: left;
+}
+
+.query_form {
+    float: right;
+}
+
+.query_form {
+    width: 500px;
+    height: 100%;
+    border-left: 1px solid #ccc;
+
+}
+
+.exam_content .iconfont {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background: url('../image/icon/arrow-1.png') no-repeat center bottom;
+    background-size: 80%;
+}
+
+.exam_content td {
+    padding: 25px 12px;
+    font-size: 14px;
+}
+
+.query_form td {
+	padding: 12px 12px;
+}
+
+.exam_content td a {
+    margin-left: 5px;
+}
+
+.exam_content td a:hover {
+    text-decoration: underline;
+}
+
+.exam_type_title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+    vertical-align: top;
+}
+
+.et_title_icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url('../image/icon/arrow-grey-left.png') no-repeat;
+    margin-top: 1px;
+}
+
+.query_form {
+    overflow: hidden;
+}
+
+.query_form_container li {
+    float: left;
+    height: 100%
+}
+
+.query_form_container {
+    width: 4000px;
+    height: 100%;
+}
+
+.query_form_container div {
+    width: 500px;
+    height: 100%;
+    padding: 20px 20px 20px 80px;
+    box-sizing: border-box;
+}
+
+
+/*--------------------查询表格样式start-----------------------*/
+.query_form_container table {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.query_form_container .label {
+    width: 40%;
+    /*padding: 10px 20px;*/
+}
+
+.query_form_container input {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "微软雅黑";
+    font-size: 15px;
+    color: #666;
+    padding-left: 10px;
+}
+
+.query_form_container select {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "微软雅黑";
+    font-size: 15px;
+    color: #666;
+    padding-left: 10px;
+}
+
+.query_form_container input:focus {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .75);
+    background-color: transparent;
+}
+
+.query_form_container .submit,
+.query_form_container .reset {
+	width: 60px;
+	float: left;
+	text-align: center;
+	padding: 0;
+	margin-right: 30px;
+	background: #fff;
+	border: 1px solid #ccc;
+	transition: all .3s;
+}
+
+.query_form_container .submit:hover,
+.query_form_container .reset:hover {
+	background: #696969;
+	color: #fff;
+}
+
+.query_form_container .captcha_input {
+    width: 100px;
+    vertical-align: middle;
+}
+
+.captcha {
+    height: 40px;
+    width: 100px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+
+/*--------------------查询表格样式end-----------------------*/
+
+.table_placeholder {
+	height: 30px;
+}

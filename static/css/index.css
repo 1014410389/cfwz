@@ -1,0 +1,426 @@
+@charset "UTF-8";
+
+/*#content {
+    height: 100%;
+    width: 100%;
+}*/
+
+#content_left {
+    float: left;
+    width: 900px;
+    /*height: 1000px;*/
+}
+
+#content_right {
+    float: right;
+    width: 300px;
+    /*height: 750px;*/
+}
+
+
+/*-----------------轮播图start------------------------*/
+#content_left .slideshow {
+    width: 880px;
+    height: 300px;
+    background-color: #508CD7;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+.slideshow ul {
+    position: absolute;
+    width: 2640px;
+    height: 300px;
+    left: 0;
+}
+
+.slideshow ul li {
+    float: left;
+}
+
+.slideshow .box {
+    width: 600px;
+    height: 300px;
+    float: left;
+}
+
+.slideshow .box img {
+    height: 300px;
+    width: 600px;
+}
+
+.slideshow .box_context {
+    width: 280px;
+    height: 300px;
+    float: left;
+}
+.slideshow .box_context p {
+    text-align: center;
+}
+
+.slideshow li:nth-child(1) .box_context {
+    background-color: #384349;
+}
+
+.slideshow li:nth-child(2) .box_context {
+    background-color: #EDCA6C;
+}
+
+.slideshow li:nth-child(3) .box_context {
+    background-color: #7AA2C9;
+}
+
+.slideshow li:nth-child(1) .box {
+    background-color: #384349;
+}
+
+.slideshow li:nth-child(2) .box {
+    background-color: #EDCA6C;
+}
+
+.slideshow li:nth-child(3) .box {
+    background-color: #7AA2C9;
+}
+
+.arrow_left,
+.arrow_right {
+    position: absolute;
+    top: 50%;
+    margin-top: -21px;
+    opacity: .3;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.arrow_left {
+    left: 0;
+}
+
+.arrow_right {
+    right: 0;
+}
+
+.arrow_left:hover,
+.arrow_right:hover {
+    opacity: .9;
+}
+
+.slideshow .box_context {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 25px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.slideshow .slideshow_detail {
+    display: block;
+    width: 120px;
+    height: 40px;
+    border: 2px solid #fff;
+    text-align: center;
+    line-height: 40px;
+    margin: 0 auto;
+    color: #fff;
+    font-weight: bold;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    margin-top: 150px;
+}
+
+.slideshow li:nth-child(1) .slideshow_detail:hover {
+    background: #fff;
+    color: #384349;
+}
+
+.slideshow li:nth-child(2) .slideshow_detail:hover {
+    background: #fff;
+    color: #EDCA6C;
+}
+
+.slideshow li:nth-child(3) .slideshow_detail:hover {
+    background: #fff;
+    color: #7AA2C9;
+}
+
+
+/*-----------------轮播图end------------------------*/
+
+
+/*--------------------个人信息模块start-----------------*/
+#content_right .user_info {
+    width: 290px;
+    margin: 0 0 10px 0;
+    background-color: #fff;
+}
+
+.user_info .user_info_container {
+    width: 100%;
+    border-radius: 5px;
+    padding: 0 20px 20px 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.more_option {
+    content: '';
+    background: url('../image/menu.png') no-repeat center center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+.user_info_container table {
+    width: 100%;
+}
+
+.user_info_container table td {
+    padding: 20px 0 0 20px;
+    font-size: 14px;
+}
+
+.user_info_container a:hover {
+    text-decoration: underline;
+}
+
+.option_panel {
+    display: none;
+    position: absolute;
+    background: #fff;
+    right: -95px;
+    height: 98px;
+    top: 0px;
+    box-shadow: 0px -1px 10px rgba(0, 0, 0, .3);
+    z-index: 2;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.option_panel li {
+    line-height: 38px;
+    text-align: center;
+}
+
+.option_panel:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    transform: rotate(130deg);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    top: 10px;
+    left: -5px;
+    z-index: 1;
+}
+
+.complete_user_info {
+    box-sizing: border-box;
+    display: none;
+    width: 100%;
+    height: 55%;
+    padding: 0 20px 20px 20px;
+}
+
+.complete_user_info table {
+    width: 100%;
+}
+
+.complete_user_info table td {
+    padding: 20px 0 0 20px;
+    font-size: 16px;
+}
+
+.complete_user_info .first_column {
+    width: 30px;
+}
+
+.complete_user_info input {
+    height: 100%;
+    /*width: 200px;*/
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    color: #666;
+    padding: 5px 10px 5px 10px;
+}
+
+.complete_user_info input[type='submit'],
+.complete_user_info input[type='reset']{
+    transition: all .3s;
+    background: #fff;
+}
+
+.complete_user_info input[type='submit']:hover,
+.complete_user_info input[type='reset']:hover {
+    background: #737373;
+    color: #fff;
+}
+/*--------------------个人信息模块end-----------------*/
+
+/*-------------------其他信息start--------------------*/
+#content_right .other_info {
+    height: 200px;
+    width: 290px;
+    margin: 10px 0 10px 0;
+    background-color: #fff;
+}
+
+.other_info .other_info_container {
+    width: 100%;
+    height: 160px;
+    /*border-left: 2px solid #7D7D7D;*/
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.other_info_container table td {
+    padding: 20px;
+}
+
+/*-------------------其他信息end--------------------*/
+
+/*-------------------考试资讯start-------------------*/
+#content_left .exam_info {
+    position: relative;
+    width: 880px;
+    height: 800px;
+    margin: 10px auto;
+    background-color: #fff;
+}
+
+.exam_info .exam_info_container {
+    width: 100%;
+    height: 660px;
+    /*border-left: 2px solid #7D7D7D;*/
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.exam_info_container ul li {
+    padding: 4px 0;
+    margin-bottom: 10px;
+}
+
+.exam_info .exam_info_container ul {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.exam_info_title {
+    border-left: 3px solid #757575;
+    padding-left: 5px;
+    font-size: 18px;
+    color: #707070;
+    transition: all .2s;
+}
+
+.exam_info_title:hover {
+    color: #3cf;
+    text-decoration: underline;
+}
+
+.exam_info_description {
+    text-indent: 24px;
+    margin-top: 5px;
+    padding-left: 20px;
+    color: #B9B9B9;
+    text-transform: uppercase
+        /*white-space:nowrap;
+    word-wrap:break-word;
+    word-break:break-all;*/
+}
+
+/*-------------------考试资讯end---------------------*/
+
+
+
+
+/*------------倒计时start--------------*/
+
+#content_right .countdown {
+    width: 290px;
+    background-color: #fff;
+    height: 450px;
+}
+
+.countdown .countdown_container {
+    position: relative;
+    height: 390px;
+    padding: 10px;
+    /*border-left: 2px solid #7D7D7D;*/
+    border-radius: 5px;
+}
+
+.countdown .countdown_exam_type {
+    display: block;
+    font-size: 18px;
+    /*font-weight: bold;*/
+}
+
+.countdown_list td {
+    padding: 1px 0;
+}
+
+.countdown_list tr:nth-child(2n+1) td {
+    padding-top: 5 px;
+}
+
+.countdown #countdown1,
+.countdown #countdown2,
+.countdown #countdown3,
+.countdown #countdown4,
+.countdown #countdown5 {
+    width: 50px;
+    height: 40px;
+    background: #9E2D2D;
+    color: #fff;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.notification {
+    position: absolute;
+    bottom: 10px;
+    color: rgba(204, 22, 22, .7);
+    font-size: 12px;
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
+.countdown_detail span,
+.countdown_detail a {
+    color: #AFAFAF;
+}
+
+.countdown_detail a {
+    text-decoration: underline;
+    transition: all .2s;
+}
+
+.countdown_detail a:hover {
+    color: #3cf;
+    text-decoration: underline;
+}
+
+.table_placeholder {
+    height: 10px;
+}
+
+/*------------倒计时end----------------*/

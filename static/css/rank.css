@@ -1,0 +1,165 @@
+@charset "UTF-8";
+
+.echarts_container {
+    box-sizing: border-box;
+    width: 1180px;
+    /*height: 587px;*/
+    background: #fff;
+    margin: 0 10px 10px 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 50px;
+}
+
+.exam_select,
+.echarts {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 20px;
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.exam_select {
+	height: 200px;
+	margin-bottom: 20px;
+}
+
+.echarts {
+	/*float: right;*/
+	/*width: 700px;*/
+	overflow:hidden;
+	height: 487px;
+}
+
+#form,
+#form2 {
+	float: left;
+	width: 400px;
+	height: 300px;
+}
+
+/*-----------------表单样式start-----------------*/
+.table_placeholder {
+	height: 16px;
+}
+
+.exam_select table {
+	width: 300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.exam_select .label {
+    width: 20%;
+    /*padding: 10px 20px;*/
+}
+
+.exam_select input,
+.exam_select select {
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "微软雅黑";
+    font-size: 15px;
+    color: #666;
+    padding-left: 10px;
+}
+
+.exam_select input:focus {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .75);
+    background-color: transparent;
+}
+
+.exam_select .submit,
+.exam_select .reset {
+	width: 60px;
+	float: left;
+	text-align: center;
+	padding: 0;
+	margin-left: 30px;
+	background: #fff;
+	border: 1px solid #ccc;
+	transition: all .3s;
+}
+
+.exam_select .submit:hover,
+.exam_select .reset:hover {
+	background: #696969;
+	color: #fff;
+}
+.exam_select_title {
+	float: left;
+	margin-bottom: 16px;
+}
+
+.show_left{
+	float: right;
+	color: red;
+	cursor: pointer;
+}
+
+.hide_left {
+	margin-top: -16px;
+}
+
+.exam_select_title .hide_left:hover,
+.show_left:hover {
+	text-decoration: underline;
+}
+
+/*-----------------表单样式end-------------------*/
+
+/*-----------------图表样式start-------------------*/
+.echarts table {
+	width: 100%;
+
+}
+
+.echarts table th {
+	background: #BEBEBE;
+	vertical-align: middle;
+	color: #fff;
+	font-weight: bold;
+	height: 30px;
+	border: 1px solid #ccc;	
+}
+
+.echarts table td {
+	vertical-align: middle;
+	padding: 20px;
+	border: 1px solid #ccc;
+	font-size: 15px;
+	/*line-height: 30px;*/
+}
+
+.echarts td div {
+	margin: 10px 0;
+}
+
+.echarts .max_score,
+.echarts .range {
+	color: #FF0000;
+}
+
+.echarts .my_score,
+.echarts .range_num {
+	color: #2f4553;
+}
+
+.echarts .min_score,
+.echarts .range_per {
+	color: #65a0a8;
+}
+
+.echarts .max_score,
+.echarts .my_score,
+.echarts .min_score,
+.echarts .range,
+.echarts .range_num,
+.echarts .range_per {
+	font-weight: bold;
+}
+/*-----------------图表样式end-------------------*/

@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.feedback_container {
+    box-sizing: border-box;
+    width: 1180px;
+    height: 587px;
+    background: #fff;
+    margin: 0 10px 10px 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.feedback_table {
+    margin: 50px auto;
+}
+
+.feedback_table tr,
+.feedback_table td {
+    /*border: 1px solid #ccc;*/
+}
+
+.feedback_table td {
+    /*width: 500px;*/
+    padding: 10px 20px;
+    vertical-align: middle;
+}
+
+.feedback_table .first_line {
+    text-align: right;
+    width: 100px;
+}
+
+.feedback_table textarea {
+    width: 100%;
+    height: 180px;
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.feedback_table input {
+    box-sizing: border-box;
+    width: 300px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #666;
+    padding-left: 10px;
+}
+
+.feedback_table input:focus {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .75);
+    background-color: transparent;
+}
+
+.feedback_table #submit_btn {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background: #fff;
+    text-align: center;
+    padding: 0;
+    transition: all .3s;
+}
+
+.feedback_table #submit_btn:hover {
+    background: #797979;
+    color: #fff;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .75);
+    background-color: transparent;
+}

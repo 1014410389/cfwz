@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+.detail_container {
+    box-sizing: border-box;
+    width: 1180px;
+    height: 587px;
+    background: #fff;
+    margin: 0 10px 10px 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 50px;
+    font-size: 14px;
+}
+
+.score_option {
+	box-sizing: border-box;
+    width: 1180px;
+    height: 587px;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 50px;
+}
+
+.score_detail,
+.score_option,
+.transcript {
+	height: 487px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.score_option {
+	float: right;
+	width: 240px;	
+}
+
+.score_option a {
+	color: #000;
+	transition: all .2s;
+}
+
+.score_option a:hover {
+	color: #3cf;
+	text-decoration: underline;
+}
+
+.score_detail {
+	float: left;
+	width: 240px;
+}
+
+.transcript {
+	height: 100%;
+	float: left;
+	width: 550px;
+	margin:0 25px;
+	overflow: hidden;
+	position: relative;
+}
+
+.mask {
+	position: absolute;
+	height: 50px;
+	width: 100%;
+	bottom: 0;
+	left: 0;	
+	right: 0;
+	background: rgba(255,255,255, .8);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 1);
+}
+
+
+.transcript button {
+	position: absolute;
+	width: 70px;
+	height: 30px;
+	background: #fff;
+	bottom: 10px;
+	z-index: 3;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.transcript .hide_transcript{
+	right: 10px;
+}
+
+.transcript #inputCanvas {
+	left: 10px;
+}
+.transcript #clearCanvas {
+	left: 90px;
+}
+
+
+
+.detail_ul,
+.option_ul {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.option_ul {
+	text-align: center;
+}
+
+.option_ul li {
+	margin: 50px 0 20px 0;
+}
+
+.detail_ul li {
+	margin:40px 0 20px 0;
+}
+
+.transcript canvas {
+	margin: 10px 5px 10px 5px;
+}
+
+.hidden_msg {
+	visibility: hidden;
+}
+
+#transcript_pic {
+	display: none;
+} 	
