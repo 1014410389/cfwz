@@ -82,6 +82,56 @@
 	box-sizing: border-box;
 }
 
+.option {
+	margin-bottom: 5px;
+	padding: 5px 0;
+}
+
+.option label {
+	margin-left: 20px;
+}
+
+.option_left {
+	float: left;
+}
+
+.option_right {
+	float: right;
+}
+
+.option .add_data,
+.option .select_data,
+.option #searchText {
+	background: #E8E8E8;
+	height: 30px;
+	transition: all .3s;
+	border: none;
+}
+
+.option .add_data {
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	line-height: 30px;
+	color: #000;
+}
+
+.option .select_data {
+	width: 100px;
+}
+
+.option #searchText {
+	width: 200px;
+	padding: 0 10px;
+}
+
+.option .add_data:hover, 
+.option .select_data:hover,
+.option #searchText:hover {
+	background: #ccc;
+	cursor: pointer;
+}
+
 .detail_content table {
 	width: 100%;
 	text-align: center;
@@ -92,6 +142,12 @@
 	padding: 12px;
 	background: #98A9CE;
 	color: #fff;
+}
+
+.detail_content input[type=checkbox] {
+	border: 0;
+	outline: none;
+	background: #fff;
 }
 
 .detail_content td {

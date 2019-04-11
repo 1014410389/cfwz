@@ -189,40 +189,31 @@ function pageUrl($page, $url = '') {
  */
 function pages($total, $currentPage, $pageSize, $show = 6) {
 	$pageStr = '';
-
 	//仅当总数大于每页显示条数 才进行分页处理
 	if ($total > $pageSize) {
 		//总页数
 		$totalPage = ceil($total / $pageSize); //向上取整 获取总页数
-
 		//对当前页进行处理
 		$currentPage = $currentPage > $totalPage ? $totalPage : $currentPage;
 		//分页起始页
 		$from = max(1, ($currentPage - intval($show / 2)));
 		//分页结束页
 		$to = $from + $show - 1;
-
 		$pageStr .= '<div class="page-nav">';
 		$pageStr .= '<ul>';
-
 		//仅当 当前页大于1的时候 存在 首页和上一页按钮
 		if ($currentPage > 1) {
-
 			$pageStr .= "<li><a href='" . pageUrl(1) . "'>首页</a></li>";
 			$pageStr .= "<li><a href='" . pageUrl($currentPage - 1) . "'>上一页</a></li>";
-
 		}
-
 		//当结束页大于总页
 		if ($to > $totalPage) {
 			$to = $totalPage;
 			$from = max(1, $to - $show + 1);
 		}
-
 		if ($from > 1) {
 			$pageStr .= '<li>...</li>';
 		}
-
 		for ($i = $from; $i <= $to; $i++) {
 			if ($i != $currentPage) {
 				$pageStr .= "<li><a href='" . pageUrl($i) . "'>{$i}</a></li>";
@@ -230,22 +221,16 @@ function pages($total, $currentPage, $pageSize, $show = 6) {
 				$pageStr .= "<li><span class='curr-page'>{$i}</span></li>";
 			}
 		}
-
 		if ($to < $totalPage) {
 			$pageStr .= '<li>...</li>';
-
 		}
-
 		if ($currentPage < $totalPage) {
 			$pageStr .= "<li><a href='" . pageUrl($currentPage + 1) . "'>下一页</a></li>";
 			$pageStr .= "<li><a href='" . pageUrl($totalPage) . "'>尾页</a></li>";
 		}
-
 		$pageStr .= '</ul>';
 		$pageStr .= '</div>';
 
 	}
-
 	return $pageStr;
-
 }

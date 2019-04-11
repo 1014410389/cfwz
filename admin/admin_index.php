@@ -7,13 +7,26 @@ $conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $page = max($page, 1);
-$pageSize = 15;
+$pageSize = 14;
 
 $offset = ($page - 1) * $pageSize;
 
 // 从url获取数据库信息
 $table = $_GET['table'];
 $pk = $_GET['pk'];
+$searchText = $_GET['searchText'];
+$keyword = $_GET['keyword'] ? $_GET['keyword'] : null;
+if ($table == 'examination') {
+	$where = $keyword ? "WHERE `exam_id` LIKE '%{$keyword}%' OR `exam_name` LIKE '%{$keyword}%' OR `exam_type` LIKE '%{$keyword}%'" : null;
+} else if ($table == 'user') {
+	$where = $keyword ? "WHERE `identity_num` LIKE '%{$keyword}%' OR `username` LIKE '%{$keyword}%' OR `cellphone_num` LIKE '%{$keyword}%' OR `department` LIKE '%{$keyword}%' OR `school` LIKE '%{$keyword}%'" : null;
+} else if ($table == 'cet') {
+	$where = $keyword ? "AND (`transcript_id` LIKE '%{$keyword}%' OR `listening` LIKE '%{$keyword}%' OR `reading` LIKE '%{$keyword}%' OR `comprehensive` LIKE '%{$keyword}%' OR `writing` LIKE '%{$keyword}%' OR `admission_ticket` LIKE '%{$keyword}%' OR `identity_num` LIKE '%{$keyword}%' OR `exam_date` LIKE '%{$keyword}%')" : null;
+} else if ($table == 'administrator') {
+	$where = $keyword ? "WHERE `admin_id` LIKE '%{$keyword}%' OR `admin_name` LIKE '%{$keyword}%'" : null;
+} else if ($table == 'feedback') {
+	$where = $keyword ? "WHERE `username` LIKE '%{$keyword}%' OR `qq` LIKE '%{$keyword}%' OR `tel` LIKE '%{$keyword}%' OR `email` LIKE '%{$keyword}%' OR `feedback` LIKE '%{$keyword}%' OR `sub_time` LIKE '%{$keyword}%'" : null;
+}
 
 if (!empty($table) && !empty($pk)) {
 	// 四六级考试代号区分
@@ -21,9 +34,9 @@ if (!empty($table) && !empty($pk)) {
 
 	// 获取数据总数
 	if (isset($exam_id)) {
-		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}` WHERE `exam_id` = '{$exam_id}'";
+		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}` WHERE `exam_id` = '{$exam_id}' {$where}";
 	} else {
-		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}`";
+		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}` {$where}";
 	}
 	$obj = mysqli_query($conn, $sql);
 	$result = mysqli_fetch_array($obj);
@@ -31,9 +44,9 @@ if (!empty($table) && !empty($pk)) {
 	unset($sql, $obj, $result);
 
 	if (isset($exam_id)) {
-		$sql = "SELECT * FROM `{$table}` WHERE `exam_id` = '{$exam_id}' ORDER BY `{$pk}` ASC LIMIT {$offset}, {$pageSize}";
+		$sql = "SELECT * FROM `{$table}` WHERE `exam_id` = '{$exam_id}' {$where} ORDER BY `{$pk}` ASC LIMIT {$offset}, {$pageSize}";
 	} else {
-		$sql = "SELECT * FROM `{$table}` ORDER BY `{$pk}` ASC LIMIT {$offset}, {$pageSize}";
+		$sql = "SELECT * FROM `{$table}` {$where} ORDER BY `{$pk}` ASC LIMIT {$offset}, {$pageSize}";
 	}
 
 	$obj = mysqli_query($conn, $sql);
@@ -44,6 +57,13 @@ if (!empty($table) && !empty($pk)) {
 	}
 
 	$pages = pages($total, $page, $pageSize, 15);
+
+	$obj = mysqli_query($conn, $sql);
+	$array = array();
+
+	while ($result = mysqli_fetch_assoc($obj)) {
+		$array[] = $result;
+	}
 }
 
 ?>
@@ -78,20 +98,119 @@ if (!empty($table) && !empty($pk)) {
 					</ul>
 				</li>
 				<li class="first-list">
-					<i class="flat">+</i>考试
+					<i class="flat">+</i>考试成绩
 					<ul>
 						<li class="second-list">
-							<i class="flat">+</i>CET4
+							<i class="flat">+</i>全国大学英语四级考试(CET4)
 							<ul>
 								<li><a href="admin_index.php?table=cet&pk=admission_ticket&exam_id=0101">用户成绩列表</a></li>
 								<li><a href="add.php?table=cet&exam_id=0101&option=添加用户成绩">添加用户成绩</a></li>
 							</ul>
 						</li>
 						<li class="second-list">
-							<i class="flat">+</i>CET6
+							<i class="flat">+</i>全国大学英语六级考试(CET6)
 							<ul>
 								<li><a href="admin_index.php?table=cet&pk=admission_ticket&exam_id=0102">用户成绩列表</a></li>
 								<li><a href="add.php?table=cet&exam_id=0102&option=添加用户成绩">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>全国英语等级考试(PETS)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>全国外语水平考试(WSK)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>中小学教师资格考试(NTCE)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>医护英语水平考试(METS)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>全国计算机等级考试(NCRE)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<!-- 国外考试 -->
+						<li class="second-list">
+							<i class="flat">+</i>托福(TOEFL)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>德福(TestDaF)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>雅思(IELTS)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>美国研究生入学考试(GRE)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>韩国语能力考试(TOPIK)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>日本语能力测试(JLPT)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>剑桥商务英语(BEC)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>法语(DELF-DALF)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
+							</ul>
+						</li>
+						<li class="second-list">
+							<i class="flat">+</i>剑桥少儿英语(CYLE)
+							<ul>
+								<li><a href="#">用户成绩列表</a></li>
+								<li><a href="#">添加用户成绩</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -122,9 +241,26 @@ if (!empty($table) && !empty($pk)) {
 		<div id="main">
 			<div class="detail_content">
 				<?php if ($table == 'administrator'): ?>
+				<div class="option">
+					<div class="option_left">
+						<a href="add.php?table=administrator&option=添加管理员" class="add_data">添加</a>
+					</div>
+					<div class="option_right">
+						<label for="">管理员号：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">搜索：</label>
+						<input id="searchText" type="text" name="administrator" onkeypress="search()">
+					</div>
+					<div class="clearfix"></div>
+				</div>
 				<table>
 					<thead>
 						<tr>
+							<th></th>
 							<th>管理员号</th>
 							<th>管理员姓名</th>
 							<th>操作</th>
@@ -133,6 +269,7 @@ if (!empty($table) && !empty($pk)) {
 					<tbody>
 		            <?php foreach ($array as $s): ?>
 		            	<tr>
+		            		<td><input type="checkbox"></td>
 							<td><?php echo $s['admin_id'] ?></td>
 							<td><?php echo $s['admin_name'] ?></td>
 							<td>
@@ -147,9 +284,58 @@ if (!empty($table) && !empty($pk)) {
 		        	</tbody>
 				</table>
 				<?php elseif ($table == 'cet'): ?>
+				<div class="option">
+					<div class="option_left">
+						<?php if ($exam_id == '0101'): ?>
+							<a href="add.php?table=cet&exam_id=0101&option=添加用户成绩" class="add_data">添加</a>
+						<?php elseif ($exam_id == '0102'): ?>
+							<a href="add.php?table=cet&exam_id=0102&option=添加用户成绩" class="add_data">添加</a>
+						<?php endif;?>
+					</div>
+					<div class="option_right">
+						<label for="">听力：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">阅读：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">综合：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">写作和阅读：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">考试日期</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">搜索：</label>
+						<?php if ($exam_id == '0101'): ?>
+							<input id="searchText" type="text" name="cet4" onkeypress="search()">
+						<?php elseif ($exam_id == '0102'): ?>
+							<input id="searchText" type="text" name="cet6" onkeypress="search()">
+						<?php endif;?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
 				<table>
 					<thead>
 						<tr>
+							<th></th>
 							<th>考试代号</th>
 							<th>成绩单号</th>
 							<th>听力成绩</th>
@@ -165,6 +351,7 @@ if (!empty($table) && !empty($pk)) {
 					<tbody>
 		            <?php foreach ($array as $s): ?>
 		            	<tr>
+		            		<td><input type="checkbox"></td>
 							<td><?php echo $s['exam_id'] ?></td>
 							<td><?php echo $s['transcript_id'] ?></td>
 							<td><?php echo $s['listening'] ?></td>
@@ -186,9 +373,33 @@ if (!empty($table) && !empty($pk)) {
 		        	</tbody>
 				</table>
 				<?php elseif ($table == 'examination'): ?>
+				<div class="option">
+					<div class="option_left">
+						<a href="add.php?table=examination&option=添加考试类型" class="add_data">添加</a>
+					</div>
+					<div class="option_right">
+						<label for="">考试代号：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">考试类型：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">社会证书考试</option>
+							<option value="">国家教育考试</option>
+							<option value="">海外考试</option>
+						</select>
+						<label for="">搜索：</label>
+						<input id="searchText" type="text" name="examination" onkeypress="search()">
+					</div>
+					<div class="clearfix"></div>
+				</div>
 				<table>
 					<thead>
 						<tr>
+							<th></th>
 							<th>考试代号</th>
 							<th>考试名称</th>
 							<th>考试类型</th>
@@ -198,6 +409,7 @@ if (!empty($table) && !empty($pk)) {
 					<tbody>
 		            <?php foreach ($array as $s): ?>
 		            	<tr>
+		            		<td><input type="checkbox"></td>
 							<td><?php echo $s['exam_id'] ?></td>
 							<td><?php echo $s['exam_name'] ?></td>
 							<td><?php echo $s['exam_type'] ?></td>
@@ -213,9 +425,43 @@ if (!empty($table) && !empty($pk)) {
 		        	</tbody>
 				</table>
 				<?php elseif ($table == 'user'): ?>
+				<div class="option">
+					<div class="option_left">
+						<a href="add.php?table=user&option=添加用户" class="add_data">添加</a>
+					</div>
+					<div class="option_right">
+						<label for="">身份证号：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">升序</option>
+							<option value="">降序</option>
+						</select>
+						<label for="">院系：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">化学系</option>
+							<option value="">政法系</option>
+							<option value="">中文系</option>
+							<option value="">计算机科学系</option>
+							<option value="">外语系</option>
+							<option value="">管理系</option>
+						</select>
+						<label for="">学校：</label>
+						<select class="select_data" name="">
+							<option value="">默认</option>
+							<option value="">社会证书考试</option>
+							<option value="">国家教育考试</option>
+							<option value="">海外考试</option>
+						</select>
+						<label for="">搜索：</label>
+						<input id="searchText" type="text" name="user" onkeypress="search()">
+					</div>
+					<div class="clearfix"></div>
+				</div>
 				<table>
 					<thead>
 						<tr>
+							<th></th>
 							<th>身份证号</th>
 							<th>姓名</th>
 							<th>手机号码</th>
@@ -227,6 +473,7 @@ if (!empty($table) && !empty($pk)) {
 					<tbody>
 		            <?php foreach ($array as $s): ?>
 		            	<tr>
+		            		<td><input type="checkbox"></td>
 							<td><?php echo $s['identity_num'] ?></td>
 							<td><?php echo $s['username'] ?></td>
 							<td><?php echo $s['cellphone_num'] ?></td>
@@ -244,9 +491,19 @@ if (!empty($table) && !empty($pk)) {
 		        	</tbody>
 				</table>
 				<?php elseif ($table == 'feedback'): ?>
+				<div class="option">
+					<div class="option_left">
+					</div>
+					<div class="option_right">
+						<label for="">搜索：</label>
+						<input id="searchText" type="text" name="feedback" onkeypress="search()">
+					</div>
+					<div class="clearfix"></div>
+				</div>
 				<table>
 					<thead>
 						<tr>
+							<th></th>
 							<th>用户名</th>
 							<th>QQ</th>
 							<th>手机号码</th>
@@ -259,6 +516,7 @@ if (!empty($table) && !empty($pk)) {
 					<tbody>
 		            <?php foreach ($array as $s): ?>
 		            	<tr>
+		            		<td><input type="checkbox"></td>
 							<td><?php echo $s['username'] ?></td>
 							<td><?php echo $s['qq'] ?></td>
 							<td><?php echo $s['tel'] ?></td>
@@ -267,7 +525,6 @@ if (!empty($table) && !empty($pk)) {
 							<td><?php echo $s['sub_time'] ?></td>
 							<td>
 								<div class="btn">
-			                        <a href="edit.php?table=feedback&pk=ID&value=<?php echo $s['ID'] ?>" class="edit">编辑</a>
 			                        <a href="delete.php?table=feedback&pk=ID&value=<?php echo $s['ID'] ?>" class="del">删除</a>
 		                    	</div>
 		                    </td>
@@ -308,6 +565,27 @@ if (!empty($table) && !empty($pk)) {
 				return false;
 			}
 		})
+
+		function search() {
+			if(event.keyCode == 13) {
+				const searchText = document.getElementById('searchText');
+				var val = searchText.value,
+					table = searchText.name;
+				if(table == 'examination') {
+					window.location = 'admin_index.php?table=examination&pk=exam_id&keyword=' + val;
+				} else if(table == 'user') {
+					window.location = 'admin_index.php?table=user&pk=identity_num&keyword=' + val;
+				} else if(table == 'cet4') {
+					window.location = 'admin_index.php?table=cet&pk=admission_ticket&exam_id=0101&keyword=' + val;
+				} else if(table == 'cet6') {
+					window.location = 'admin_index.php?table=cet&pk=admission_ticket&exam_id=0102&keyword=' + val;
+				} else if(table == 'administrator') {
+					window.location = 'admin_index.php?table=administrator&pk=admin_id&keyword=' + val;
+				} else if(table == 'feedback') {
+					window.location = 'admin_index.php?table=feedback&pk=ID&keyword=' + val;
+				}
+			}
+		}
 	</script>
 </body>
 </html>
