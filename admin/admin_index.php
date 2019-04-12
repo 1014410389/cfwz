@@ -14,7 +14,7 @@ $offset = ($page - 1) * $pageSize;
 // 从url获取数据库信息
 $table = $_GET['table'];
 $pk = $_GET['pk'];
-$searchText = $_GET['searchText'];
+// $searchText = $_GET['searchText'];
 $keyword = $_GET['keyword'] ? $_GET['keyword'] : null;
 if ($table == 'examination') {
 	$where = $keyword ? "WHERE `exam_id` LIKE '%{$keyword}%' OR `exam_name` LIKE '%{$keyword}%' OR `exam_type` LIKE '%{$keyword}%'" : null;
@@ -28,15 +28,18 @@ if ($table == 'examination') {
 	$where = $keyword ? "WHERE `username` LIKE '%{$keyword}%' OR `qq` LIKE '%{$keyword}%' OR `tel` LIKE '%{$keyword}%' OR `email` LIKE '%{$keyword}%' OR `feedback` LIKE '%{$keyword}%' OR `sub_time` LIKE '%{$keyword}%'" : null;
 }
 
+$order = $_GET['order'] ? $_GET['order'] : null;
+$orderBy = $order ? "ORDER BY " . $order : null;
+
 if (!empty($table) && !empty($pk)) {
 	// 四六级考试代号区分
 	$exam_id = isset($_GET['exam_id']) ? $_GET['exam_id'] : null;
 
 	// 获取数据总数
 	if (isset($exam_id)) {
-		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}` WHERE `exam_id` = '{$exam_id}' {$where}";
+		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}` WHERE `exam_id` = '{$exam_id}' {$where} {$orderBy}";
 	} else {
-		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}` {$where}";
+		$sql = "SELECT COUNT(`{$pk}`) AS total FROM `{$table}` {$where} {$orderBy}";
 	}
 	$obj = mysqli_query($conn, $sql);
 	$result = mysqli_fetch_array($obj);
@@ -44,9 +47,9 @@ if (!empty($table) && !empty($pk)) {
 	unset($sql, $obj, $result);
 
 	if (isset($exam_id)) {
-		$sql = "SELECT * FROM `{$table}` WHERE `exam_id` = '{$exam_id}' {$where} ORDER BY `{$pk}` ASC LIMIT {$offset}, {$pageSize}";
+		$sql = "SELECT * FROM `{$table}` WHERE `exam_id` = '{$exam_id}' {$where} {$orderBy} LIMIT {$offset}, {$pageSize}";
 	} else {
-		$sql = "SELECT * FROM `{$table}` {$where} ORDER BY `{$pk}` ASC LIMIT {$offset}, {$pageSize}";
+		$sql = "SELECT * FROM `{$table}` {$where} {$orderBy} LIMIT {$offset}, {$pageSize}";
 	}
 
 	$obj = mysqli_query($conn, $sql);
@@ -246,13 +249,19 @@ if (!empty($table) && !empty($pk)) {
 						<a href="add.php?table=administrator&option=添加管理员" class="add_data">添加</a>
 					</div>
 					<div class="option_right">
-						<label for="">管理员号：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<label>管理员号：</label>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'admin_id ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'admin_id DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="admin_id ASC">升序</option>
+							<option value="admin_id DESC">降序</option>
 						</select>
-						<label for="">搜索：</label>
+						<label>搜索：</label>
 						<input id="searchText" type="text" name="administrator" onkeypress="search()">
 					</div>
 					<div class="clearfix"></div>
@@ -294,34 +303,64 @@ if (!empty($table) && !empty($pk)) {
 					</div>
 					<div class="option_right">
 						<label for="">听力：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'listening ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'listening DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="listening ASC">升序</option>
+							<option value="listening DESC">降序</option>
 						</select>
 						<label for="">阅读：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'reading ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'reading DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="reading ASC">升序</option>
+							<option value="reading DESC">降序</option>
 						</select>
 						<label for="">综合：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'comprehensive ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'comprehensive DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="comprehensive ASC">升序</option>
+							<option value="comprehensive DESC">降序</option>
 						</select>
 						<label for="">写作和阅读：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'writing ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'writing DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="writing ASC">升序</option>
+							<option value="writing DESC">降序</option>
 						</select>
 						<label for="">考试日期</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'exam_date ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'exam_date DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="exam_date ASC">升序</option>
+							<option value="exam_date DESC">降序</option>
 						</select>
 						<label for="">搜索：</label>
 						<?php if ($exam_id == '0101'): ?>
@@ -379,17 +418,28 @@ if (!empty($table) && !empty($pk)) {
 					</div>
 					<div class="option_right">
 						<label for="">考试代号：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'exam_id ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'exam_id DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="exam_id ASC">升序</option>
+							<option value="exam_id DESC">降序</option>
 						</select>
 						<label for="">考试类型：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">社会证书考试</option>
-							<option value="">国家教育考试</option>
-							<option value="">海外考试</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'exam_type ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'exam_type DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="exam_type ASC">升序</option>
+							<option value="exam_type DESC">降序</option>
 						</select>
 						<label for="">搜索：</label>
 						<input id="searchText" type="text" name="examination" onkeypress="search()">
@@ -431,27 +481,28 @@ if (!empty($table) && !empty($pk)) {
 					</div>
 					<div class="option_right">
 						<label for="">身份证号：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">升序</option>
-							<option value="">降序</option>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'identity_num ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'identity_num DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="identity_num ASC">升序</option>
+							<option value="identity_num DESC">降序</option>
 						</select>
-						<label for="">院系：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">化学系</option>
-							<option value="">政法系</option>
-							<option value="">中文系</option>
-							<option value="">计算机科学系</option>
-							<option value="">外语系</option>
-							<option value="">管理系</option>
-						</select>
-						<label for="">学校：</label>
-						<select class="select_data" name="">
-							<option value="">默认</option>
-							<option value="">社会证书考试</option>
-							<option value="">国家教育考试</option>
-							<option value="">海外考试</option>
+						<label for="">手机号码：</label>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'cellphone_num ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'cellphone_num DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="cellphone_num ASC">升序</option>
+							<option value="cellphone_num DESC">降序</option>
 						</select>
 						<label for="">搜索：</label>
 						<input id="searchText" type="text" name="user" onkeypress="search()">
@@ -495,6 +546,42 @@ if (!empty($table) && !empty($pk)) {
 					<div class="option_left">
 					</div>
 					<div class="option_right">
+						<label for="">QQ:</label>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'qq ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'qq DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="qq ASC">升序</option>
+							<option value="qq DESC">降序</option>
+						</select>
+						<label for="">手机号码：</label>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'tel ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'tel DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="tel ASC">升序</option>
+							<option value="tel DESC">降序</option>
+						</select>
+						<label for="">反馈时间：</label>
+						<select class="select_data" onchange="change(this.value)">
+							<?php if ($_GET['order'] == 'sub_time ASC'): ?>
+								<option value="">升序</option>
+							<?php elseif ($_GET['order'] == 'sub_time DESC'): ?>
+								<option value="">降序</option>
+							<?php else: ?>
+								<option value="">请选择</option>
+							<?php endif;?>
+							<option value="sub_time ASC">升序</option>
+							<option value="sub_time DESC">降序</option>
+						</select>
 						<label for="">搜索：</label>
 						<input id="searchText" type="text" name="feedback" onkeypress="search()">
 					</div>
@@ -585,6 +672,24 @@ if (!empty($table) && !empty($pk)) {
 					window.location = 'admin_index.php?table=feedback&pk=ID&keyword=' + val;
 				}
 			}
+		}
+
+		function change(val) {
+			const searchText = document.getElementById('searchText');
+			var table = searchText.name;
+			if(table == 'examination') {
+					window.location = 'admin_index.php?table=examination&pk=exam_id&order=' + val;
+				} else if(table == 'user') {
+					window.location = 'admin_index.php?table=user&pk=identity_num&order=' + val;
+				} else if(table == 'cet4') {
+					window.location = 'admin_index.php?table=cet&pk=admission_ticket&exam_id=0101&order=' + val;
+				} else if(table == 'cet6') {
+					window.location = 'admin_index.php?table=cet&pk=admission_ticket&exam_id=0102&order=' + val;
+				} else if(table == 'administrator') {
+					window.location = 'admin_index.php?table=administrator&pk=admin_id&order=' + val;
+				} else if(table == 'feedback') {
+					window.location = 'admin_index.php?table=feedback&pk=ID&order=' + val;
+				}
 		}
 	</script>
 </body>
