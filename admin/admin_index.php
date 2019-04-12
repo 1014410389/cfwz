@@ -1,6 +1,13 @@
 <?php
 // 引入fun.php
 include_once '../lib/fun.php';
+// 开启SESSION
+session_start();
+if ($_SESSION['admin'] == null) {
+	echo "<script>alert('管理员还未登录，请登录');window.location.href='admin_login.php'</script>";
+} else {
+	$name = $_SESSION['admin']['admin_name'];
+}
 
 // 连接数据库
 $conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
@@ -89,6 +96,8 @@ if (!empty($table) && !empty($pk)) {
 			<li><a href="#" title="">CET表></a></li>
 			<li><a href="#" title="">个人成绩></a></li>
 		</ul> -->
+		<div class="admin_info" style="float: left; margin-left: 10px;font-weight: bold;">欢迎你，<?php echo $name; ?><a href="./admin_logout.php" style="margin-left: 10px;">登出</a></div>
+		<div class="clearfix"></div>
 	</nav>
 	<content id="content">
 		<div id="sidebar">
