@@ -1,14 +1,19 @@
 <?php
+// 引入fun.php文件
 include_once '../lib/fun.php';
 
+// 根据url获取操作和表名
 $option = $_GET['option'];
 $table = $_GET['table'];
 if ($table == 'cet') {
 	$exam_id = $_GET['exam_id'];
 }
+// 连接数据库
 $conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
 
+// 触发提交按钮
 if (isset($_POST['submit'])) {
+	// 根据表名进行操作
 	if ($_GET['table'] == 'user') {
 		$id_num = trim($_POST['id_num']);
 		$username = trim($_POST['username']);

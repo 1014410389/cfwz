@@ -1,9 +1,11 @@
 <?php
+// 引入fun.php文件
 include_once '../lib/fun.php';
-
 $isEdited = $_GET['isEdited'] ? $_GET['isEdited'] : null;
+// 连接数据库
 $conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
 
+// 判断是否首次编辑，如果为false，进行数据查询获取数据
 if (empty($isEdited)) {
 	$table = $_GET['table'];
 	$pk = $_GET['pk'];
@@ -16,7 +18,9 @@ if (empty($isEdited)) {
 	unset($sql, $obj, $result);
 }
 
+// 当数据被编辑了并且点击了提交按钮
 if (isset($_POST['submit']) && $isEdited == 1) {
+	// 根据表名进行数据库插入操作
 	if ($_GET['table'] == 'user') {
 		$id_num = trim($_POST['id_num']);
 		$username = trim($_POST['username']);

@@ -21,8 +21,11 @@ $offset = ($page - 1) * $pageSize;
 // 从url获取数据库信息
 $table = $_GET['table'];
 $pk = $_GET['pk'];
-// $searchText = $_GET['searchText'];
+
+// 搜索功能
+// 判断用户是否使用了搜索并且传递了keyword值
 $keyword = $_GET['keyword'] ? $_GET['keyword'] : null;
+// 根据条件判断查询表格
 if ($table == 'examination') {
 	$where = $keyword ? "WHERE `exam_id` LIKE '%{$keyword}%' OR `exam_name` LIKE '%{$keyword}%' OR `exam_type` LIKE '%{$keyword}%'" : null;
 } else if ($table == 'user') {
@@ -35,6 +38,7 @@ if ($table == 'examination') {
 	$where = $keyword ? "WHERE `username` LIKE '%{$keyword}%' OR `qq` LIKE '%{$keyword}%' OR `tel` LIKE '%{$keyword}%' OR `email` LIKE '%{$keyword}%' OR `feedback` LIKE '%{$keyword}%' OR `sub_time` LIKE '%{$keyword}%'" : null;
 }
 
+// 排序功能
 $order = $_GET['order'] ? $_GET['order'] : null;
 $orderBy = $order ? "ORDER BY " . $order : null;
 
@@ -662,6 +666,7 @@ if (!empty($table) && !empty($pk)) {
 			}
 		})
 
+		// 搜索功能
 		function search() {
 			if(event.keyCode == 13) {
 				const searchText = document.getElementById('searchText');
@@ -683,6 +688,7 @@ if (!empty($table) && !empty($pk)) {
 			}
 		}
 
+		// 排序功能
 		function change(val) {
 			const searchText = document.getElementById('searchText');
 			var table = searchText.name;
