@@ -276,6 +276,7 @@ if (!empty($table) && !empty($pk)) {
 						</select>
 						<label>搜索：</label>
 						<input id="searchText" type="text" name="administrator" onkeypress="search()">
+						<button class="search_btn" onclick="search(true)">搜索</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -378,8 +379,10 @@ if (!empty($table) && !empty($pk)) {
 						<label for="">搜索：</label>
 						<?php if ($exam_id == '0101'): ?>
 							<input id="searchText" type="text" name="cet4" onkeypress="search()">
+							<button class="search_btn" onclick="search(true)">搜索</button>
 						<?php elseif ($exam_id == '0102'): ?>
 							<input id="searchText" type="text" name="cet6" onkeypress="search()">
+							<button class="search_btn" onclick="search(true)">搜索</button>
 						<?php endif;?>
 					</div>
 					<div class="clearfix"></div>
@@ -456,6 +459,7 @@ if (!empty($table) && !empty($pk)) {
 						</select>
 						<label for="">搜索：</label>
 						<input id="searchText" type="text" name="examination" onkeypress="search()">
+						<button class="search_btn" onclick="search(true)">搜索</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -519,6 +523,7 @@ if (!empty($table) && !empty($pk)) {
 						</select>
 						<label for="">搜索：</label>
 						<input id="searchText" type="text" name="user" onkeypress="search()">
+						<button class="search_btn" onclick="search(true)">搜索</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -597,6 +602,7 @@ if (!empty($table) && !empty($pk)) {
 						</select>
 						<label for="">搜索：</label>
 						<input id="searchText" type="text" name="feedback" onkeypress="search()">
+						<button class="search_btn" onclick="search(true)">搜索</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -667,8 +673,8 @@ if (!empty($table) && !empty($pk)) {
 		})
 
 		// 搜索功能
-		function search() {
-			if(event.keyCode == 13) {
+		function search(isClick) {
+			if(event.keyCode == 13 || isClick == true) {
 				const searchText = document.getElementById('searchText');
 				var val = searchText.value,
 					table = searchText.name;

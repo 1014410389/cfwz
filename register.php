@@ -1,13 +1,14 @@
 <?php
+// 引入func.php文件
+include_once './lib/fun.php';
 // 开启SESSION
 session_start();
 if (!empty($_POST['id_num']) && isset($_POST['register'])) {
-	// 引入func.php文件
-	include_once './lib/fun.php';
-
 	// 进行数据校验
 	$id_num = trim($_POST['id_num']);
+	$id_num = check_input($id_num);
 	$upassword = trim($_POST['password']);
+	$upassword = check_input($upassword);
 	// 暂时不加密
 	// 对密码进行加密处理
 	// $upassword = createPassword($upassword);

@@ -7,14 +7,17 @@ session_start();
 if (checkLogin()) {
 	echo "<script>alert('你已经登录，即将进入主页'); location.href='index.php';</script>";
 }
+// 连接数据库
+$conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
+
 // 点击登录按钮
 if (!empty($_POST['id_num']) && isset($_POST['login'])) {
 	// 进行数据校验
 	$id_num = trim($_POST['id_num']);
+	$id_num = check_input($id_num);
 	$password = trim($_POST['password']);
+	$password = check_input($password);
 	// $autologin = $_POST['autologin'];
-	// 连接数据库
-	$conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
 	$sql = "SELECT * FROM `user` WHERE `identity_num` = '{$id_num}' LIMIT 1";
 	$obj = mysqli_query($conn, $sql);
 	$result = mysqli_fetch_assoc($obj);

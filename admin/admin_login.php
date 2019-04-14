@@ -3,14 +3,19 @@
 include_once '../lib/fun.php';
 // 开启SESSION
 session_start();
+// 连接数据库
+$conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
+
 // 点击登录按钮
 if (!empty($_POST['admin_id']) && isset($_POST['login'])) {
 	// 进行数据校验
 	$admin_id = trim($_POST['admin_id']);
+	$admin_id = check_input($conn, $admin_id);
 	$password = trim($_POST['password']);
-	// 连接数据库
-	$conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
+	$password = check_input($conn, $password);
 	$sql = "SELECT * FROM `administrator` WHERE `admin_id` = '{$admin_id}' LIMIT 1";
+	echo $sql;
+	// exit();
 	$obj = mysqli_query($conn, $sql);
 	$result = mysqli_fetch_assoc($obj);
 	// 判断结果集是否存在

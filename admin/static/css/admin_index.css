@@ -99,6 +99,12 @@
 	float: right;
 }
 
+.option_right .search_btn {
+	background: #E8E8E8;
+	height: 30px;
+	width: 50px;
+}
+
 .option .add_data,
 .option .select_data,
 .option #searchText {
@@ -106,6 +112,11 @@
 	height: 30px;
 	transition: all .3s;
 	border: none;
+}
+
+.option #searchText {
+	background: #fff;
+	border: 1px solid #ccc;
 }
 
 .option .add_data {
@@ -122,12 +133,11 @@
 
 .option #searchText {
 	width: 200px;
-	padding: 0 10px;
+	padding: 0 5px;
 }
 
 .option .add_data:hover, 
-.option .select_data:hover,
-.option #searchText:hover {
+.option .select_data:hover {
 	background: #ccc;
 	cursor: pointer;
 }

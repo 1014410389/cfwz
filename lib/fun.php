@@ -234,3 +234,20 @@ function pages($total, $currentPage, $pageSize, $show = 6) {
 	}
 	return $pageStr;
 }
+
+/**
+ * 防止SQL注入
+ * @param  [type] $value 输入变量
+ * @return [type]        格式化后的变量
+ */
+function check_input($conn, $value) {
+// 去除斜杠
+	if (get_magic_quotes_gpc()) {
+		$value = stripslashes($value);
+	}
+// 如果不是数字则加引号
+	if (!is_numeric($value)) {
+		$value = "'" . mysqli_real_escape_string($conn, $value) . "'";
+	}
+	return $value;
+}

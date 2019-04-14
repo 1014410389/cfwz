@@ -10,7 +10,6 @@ if ($table == 'cet') {
 }
 // 连接数据库
 $conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
-
 // 触发提交按钮
 if (isset($_POST['submit'])) {
 	// 根据表名进行操作
@@ -21,14 +20,23 @@ if (isset($_POST['submit'])) {
 		$department = trim($_POST['department']);
 		$school = trim($_POST['school']);
 		$upassword = trim($_POST['upassword']);
+		// if (empty($id_num)) {
+		// 	echo "<script>alert('身份证号不能为空');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
+		// } else if (empty($username)) {
 
+		// } else if (empty($upassword)) {
+
+		// }
 		$sql = "INSERT INTO `user`(`identity_num`, `username`, `cellphone_num`, `department`, `school`, `upassword`) VALUES ('{$id_num}','{$username}','{$tel}','{$department}','{$school}','{$upassword}')";
 		$obj = mysqli_query($conn, $sql);
 		if ($obj) {
 			unset($conn, $sql, $obj);
 			echo "<script>alert('添加成功');location.href='admin_index.php?table=user&pk=identity_num';</script>";
 		} else {
-			echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
+			if (mysqli_errno($conn) == 1062) {
+				echo "<script>alert('用户已存在');history.go(-1);</script>";
+			}
+			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	} elseif ($_GET['table'] == 'cet') {
 		$exam_id = trim($_POST['exam_id']);
@@ -47,7 +55,10 @@ if (isset($_POST['submit'])) {
 			unset($conn, $sql, $obj);
 			echo "<script>alert('添加成功');location.href='admin_index.php?table=cet&pk=admission_ticket&exam_id=0101';</script>";
 		} else {
-			echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
+			if (mysqli_errno($conn) == 1062) {
+				echo "<script>alert('成绩已存在');history.go(-1);</script>";
+			}
+			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	} elseif ($_GET['table'] == 'examination') {
 		$exam_id = trim($_POST['exam_id']);
@@ -61,7 +72,10 @@ if (isset($_POST['submit'])) {
 			unset($conn, $sql, $obj);
 			echo "<script>alert('添加成功');location.href='admin_index.php?table=examination&pk=exam_id';</script>";
 		} else {
-			echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
+			if (mysqli_errno($conn) == 1062) {
+				echo "<script>alert('考试类型已存在');history.go(-1);</script>";
+			}
+			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	} elseif ($_GET['table'] == 'administrator') {
 		$admin_id = trim($_POST['admin_id']);
@@ -75,7 +89,10 @@ if (isset($_POST['submit'])) {
 			unset($conn, $sql, $obj);
 			echo "<script>alert('添加成功');location.href='admin_index.php?table=administrator&pk=admin_id';</script>";
 		} else {
-			echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
+			if (mysqli_errno($conn) == 1062) {
+				echo "<script>alert('管理员已存在');history.go(-1);</script>";
+			}
+			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	}
 	mysqli_close($conn);
@@ -90,6 +107,7 @@ if (isset($_POST['submit'])) {
 	<link rel="stylesheet" type="text/css" href="../static/css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="./static/css/admin_index.css">
 	<link rel="stylesheet" type="text/css" href="./static/css/edit.css">
+	<link rel="stylesheet" type="text/css" href="./static/css/add.css">
 </head>
 <body>
 	<header id="header">
@@ -106,8 +124,11 @@ if (isset($_POST['submit'])) {
 	<content id="content">
 		<div id="main_edit">
 			<?php if ($table == 'user'): ?>
-			<form action="add.php?table=user" method="post" autocomplete="off" id="feedback-form">
-				<table class="feedback_table">
+			<div class="option_left">
+				<a href="admin_index.php?table=user&pk=identity_num" class="add_data"><返回</a>
+			</div>
+			<form action="add.php?table=user" method="post" autocomplete="off" id="add_form" name="user">
+				<table class="add_table">
 					<tbody>
 						<tr>
 							<td class="first_line">身份证号</td>
@@ -134,15 +155,18 @@ if (isset($_POST['submit'])) {
 							<td><input type="text" name="upassword" id="upassword"></td>
 						</tr>
 						<tr>
-							<td><input type="hidden" name="token" value="<?php echo $token; ?>" /></td>
+							<td></td>
 							<td><input type="submit" id="submit_btn" name="submit" value="提交">
 						</tr>
 					</tbody>
 				</table>
 			</form>
 			<?php elseif ($table == 'cet'): ?>
-			<form action="add.php?table=cet" method="post" autocomplete="off" id="feedback-form">
-				<table class="feedback_table">
+			<div class="option_left">
+				<a href="admin_index.php?table=cet&pk=admission_ticket&exam_id=0101"><返回</a>
+			</div>
+			<form action="add.php?table=cet" method="post" autocomplete="off" id="add_form" name="cet">
+				<table class="add_table">
 					<tbody>
 						<tr>
 							<td class="first_line">考试代号</td>
@@ -178,18 +202,21 @@ if (isset($_POST['submit'])) {
 						</tr>
 						<tr>
 							<td class="first_line">考试日期</td>
-							<td><input type="text" name="exam_date" id="exam_date"></td>
+							<td><input type="date" name="exam_date" id="exam_date"></td>
 						</tr>
 						<tr>
-							<td><input type="hidden" name="token" value="<?php echo $token; ?>" /></td>
+							<td></td>
 							<td><input type="submit" id="submit_btn" name="submit" value="提交">
 						</tr>
 					</tbody>
 				</table>
 			</form>
 			<?php elseif ($table == 'examination'): ?>
-			<form action="add.php?table=examination" method="post" autocomplete="off" id="feedback-form">
-				<table class="feedback_table">
+			<div class="option_left">
+				<a href="admin_index.php?table=examination&pk=exam_id"><返回</a>
+			</div>
+			<form action="add.php?table=examination" method="post" autocomplete="off" id="add_form" name="examination">
+				<table class="add_table">
 					<tbody>
 						<tr>
 							<td class="first_line">考试代号</td>
@@ -204,15 +231,18 @@ if (isset($_POST['submit'])) {
 							<td><input type="text" name="exam_type" id="exam_type"></td>
 						</tr>
 						<tr>
-							<td><input type="hidden" name="token" value="<?php echo $token; ?>" /></td>
+							<td></td>
 							<td><input type="submit" id="submit_btn" name="submit" value="提交">
 						</tr>
 					</tbody>
 				</table>
 			</form>
 			<?php elseif ($table == 'administrator'): ?>
-			<form action="add.php?table=administrator" method="post" autocomplete="off" id="feedback-form">
-				<table class="feedback_table">
+			<div class="option_left">
+				<a href="admin_index.php?table=administrator&pk=admin_id"><返回</a>
+			</div>
+			<form action="add.php?table=administrator" method="post" autocomplete="off" id="add_form" name="administrator">
+				<table class="add_table">
 					<tbody>
 						<tr>
 							<td class="first_line">管理员号</td>
@@ -227,7 +257,7 @@ if (isset($_POST['submit'])) {
 							<td><input type="text" name="password" id="password"></td>
 						</tr>
 						<tr>
-							<td><input type="hidden" name="token" value="<?php echo $token; ?>" /></td>
+							<td></td>
 							<td><input type="submit" id="submit_btn" name="submit" value="提交">
 						</tr>
 					</tbody>
@@ -236,5 +266,8 @@ if (isset($_POST['submit'])) {
 			<?php endif;?>
 		</div>
 	</content>
+	<script src="../static/script/jquery-1.10.2.min.js"></script>
+	<script src="../static/script/layer/layer.js"></script>
+	<script src="./static/script/admin_validate.js"></script>
 </body>
 </html>
