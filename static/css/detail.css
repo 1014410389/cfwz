@@ -127,3 +127,9 @@
 #transcript_pic {
 	display: none;
 } 	
+
+
+#inputCanvas,
+#clearCanvas {
+	display: none;
+}

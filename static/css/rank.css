@@ -163,3 +163,9 @@
 	font-weight: bold;
 }
 /*-----------------图表样式end-------------------*/
+
+.goback {
+	text-decoration: underline;
+	font-size: 14px;
+	text-align: center;
+}

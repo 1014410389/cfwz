@@ -1,6 +1,5 @@
 // 获取轮播图容器
 var $slidelist = $('#content_left .slideshow ul');
-
 // 轮播图右键点击事件
 $('.arrow_right').click(function() {
     if (!$slidelist.is(":animated")) {
@@ -74,8 +73,8 @@ function checkTime(i) {
     return i;
 }
 // 调用方法，设置指定日期获取倒数值，并写入html中，默认刷新时间为3秒
-window.setInterval(function() { countdowner(2019, 6, 7, 'countdown1'); }, 3000);
-window.setInterval(function() { countdowner(2019, 6, 15, 'countdown2'); }, 3000);
-window.setInterval(function() { countdowner(2019, 4, 20, 'countdown3'); }, 3000);
-window.setInterval(function() { countdowner(2019, 11, 2, 'countdown4'); }, 3000);
-window.setInterval(function() { countdowner(2019, 6, 7, 'countdown5'); }, 3000);
+window.setInterval(function() { countdowner(2019, 6, 7, 'countdown1'); }, 1000);
+window.setInterval(function() { countdowner(2019, 6, 15, 'countdown2'); }, 1000);
+window.setInterval(function() { countdowner(2019, 6, 1, 'countdown3'); }, 1000);
+window.setInterval(function() { countdowner(2019, 11, 2, 'countdown4'); }, 1000);
+window.setInterval(function() { countdowner(2019, 6, 7, 'countdown5'); }, 1000);

@@ -35,8 +35,8 @@ if (isset($_POST['change'])) {
 			<nav id="nav">
 				<ul>
 					<li class="selected"><a href="./index.php" title="首页">首页</a></li>
-					<li><a href="./query.php" title="成绩查询">成绩查询</a></li>
 					<li><a href="./signup.php" title="考试报名">考试报名</a></li>
+					<li><a href="./query.php" title="成绩查询">成绩查询</a></li>
 					<!-- <li><a href="./rank.php" title="考试统计">考试统计</a></li> -->
 					<li><a href="./detail.php" title="成绩详情">成绩详情</a></li>
 					<li><a href="./feedback.php" title="反馈">反馈</a></li>
@@ -50,8 +50,7 @@ if (isset($_POST['change'])) {
 								<div class="box"><img src="./static/image/sspic_5.jpg" alt="sspic_5">
 								</div>
 								<div class="box_context">
-									<p>2019年高考，你准备好了吗？
-								</p>
+									<p>2019年高考，你准备好了吗？</p>
 									<a class="slideshow_detail" href="https://wannianli.tianqi.com/jishiqi/gaokaodaojishi.html" title="查看详情" target="_blank">查看详情</a>
 								</div>
 							</li>
@@ -117,7 +116,7 @@ if (isset($_POST['change'])) {
 							<table>
 								<tbody>
 									<tr>
-										<td>您还没有登录，进入<a href="./login.php" title="登录">登录</a></td>
+										<td>您还没有登录，进入<a href="./login.php" title="登录"> 登录 </a>页面</td>
 									</tr>
 								</tbody>
 							</table>
@@ -185,13 +184,13 @@ if (isset($_POST['change'])) {
 									</tr>
 									<tr class="table_placeholder"><td></td></tr>
 									<tr>
-										<td><span class="countdown_exam_type">距离公务员考试还有：</span></td>
+										<td><span class="countdown_exam_type">距离计算机考试还有：</span></td>
 										<td><div id="countdown3">00</div></td>
 										<td><span class="countdown_exam_type">天</span></td>
 									</tr>
 									<tr class="countdown_detail">
-										<td><span>参考时间：2019年4月20日</span></td>
-										<td><a href="http://www.chinagwy.org/" target="_blank">查看详情></a></td>
+										<td><span>参考时间：2019年6月1日</span></td>
+										<td><a href="http://www.ncre.cn/" target="_blank">查看详情></a></td>
 									</tr>
 									<tr class="table_placeholder"><td></td></tr>
 									<tr>
@@ -213,19 +212,28 @@ if (isset($_POST['change'])) {
 										<td><span>参考时间：2019年6月7日</span></td>
 										<td><a href="https://yz.chsi.com.cn/" target="_blank">查看详情></a></td>
 									</tr>
-									<div class="notification">*当前时间仅代表大概的考试时间，如需查看准确的考试时间，请参考当地的考试公示</div>
+									<div class="notification">*当前时间仅代表最近一次的大概的考试时间，如需查看准确的考试时间，请参考当地的考试公示</div>
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<div class="other_info">
 						<div class="title_top">
-							<span>其他信息</span>
+							<span>更多操作</span>
 						</div>
 						<div class="other_info_container">
-					<!-- 		1.高考
-							2.中考
-							3.... -->
+							<div class="other">
+								<div class="other_left">
+									<div><a href="#" title="考试日历">考试日历</a></div>
+									<div><a href="#" title="短信预约提醒">短信预约提醒</a></div>
+									<div><a href="#" title="成绩审核">成绩审核</a></div>
+								</div>
+								<div class="other_right">
+									<div><a href="#" title="成绩单邮寄">成绩单邮寄</a></div>
+									<div><a href="#" title="...">...</a></div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -252,7 +260,7 @@ if (isset($_POST['change'])) {
 								<li><a href="https://www.imooc.com" title="慕课网" target="_blank">慕课网</a></li>
 								<li><a href="https://www.aliyun.com/?utm_campaign=home&utm_medium=images&utm_source=muke&utm_content=m_6598" title="阿里云" target="_blank">阿里云</a></li>
 								<li><a href="https://cloud.tencent.com/?utm_source=youlian&utm_medium=ylsq&utm_campaign=youlian" title="腾讯云" target="_blank">腾讯云</a></li>
-								<li><a href="https://www.zhihu.com/" title="知乎" target="_blank">知乎</a></li>
+								<li><a href="http://www.exam8.com/" title="考试吧" target="_blank">考试吧</a></li>
 								<li><a href="https://mp.weixin.qq.com/cgi-bin/wx" title="微信小程序" target="_blank">微信小程序</a></li>
 								<li><a href="https://www.php-z.com/" title="PHP站中文网" target="_blank">PHP站中文网</a></li>
 								<li><a href="http://www.w3school.com.cn/" title="w3cschool" target="_blank">w3cschool</a></li>

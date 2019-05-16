@@ -54,8 +54,8 @@ if (isset($_GET['submit'])) {
 			<nav id="nav">
 				<ul>
 					<li><a href="./index.php" title="index.php">首页</a></li>
-					<li class="selected"><a href="./query.php"  title="成绩查询">成绩查询</a></li>
 					<li><a href="./signup.php" title="考试报名">考试报名</a></li>
+					<li class="selected"><a href="./query.php"  title="成绩查询">成绩查询</a></li>
 					<!-- <li><a href="./rank.php" title="考试统计">考试统计</a></li> -->
 					<li><a href="./detail.php" title="成绩详情">成绩详情</a></li>
 					<li><a href="./feedback.php" title="feedback.php">反馈</a></li>
@@ -542,7 +542,7 @@ if (isset($_GET['submit'])) {
 								<li><a href="https://www.imooc.com" title="慕课网" target="_blank">慕课网</a></li>
 								<li><a href="https://www.aliyun.com/?utm_campaign=home&utm_medium=images&utm_source=muke&utm_content=m_6598" title="阿里云" target="_blank">阿里云</a></li>
 								<li><a href="https://cloud.tencent.com/?utm_source=youlian&utm_medium=ylsq&utm_campaign=youlian" title="腾讯云" target="_blank">腾讯云</a></li>
-								<li><a href="https://www.zhihu.com/" title="知乎" target="_blank">知乎</a></li>
+								<li><a href="http://www.exam8.com/" title="考试吧" target="_blank">考试吧</a></li>
 								<li><a href="https://mp.weixin.qq.com/cgi-bin/wx" title="微信小程序" target="_blank">微信小程序</a></li>
 								<li><a href="https://www.php-z.com/" title="PHP站中文网" target="_blank">PHP站中文网</a></li>
 								<li><a href="http://www.w3school.com.cn/" title="w3cschool" target="_blank">w3cschool</a></li>
@@ -588,31 +588,31 @@ if (isset($_GET['submit'])) {
 		$(function() {
 			$('.et_left a').eq(0).triggerHandler('click');
 
-// 表单验证
-$('#cet4').submit(function() {
-	// 获取表单数据
-	var $ad_ticket = $('#cet4 input[name="admission_ticket"]').val(),
-		$id_num = $('#cet4 input[name="id_num"]').val(),
-		$name = $('#cet4 input[name="name"]').val(),
-		reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-	// 准考证号和身份证号不能同时为空，身份证非空时格式验证
-	if(($ad_ticket == '' || $ad_ticket.length <= 0) && ($id_num == '' || $id_num.length <=0)) {
-		layer.tips('准考证和身份证至少填写一项', '#cet4 .ad_ticket', { time: 2000, tips: [2, '#CB5B5B'] });
-        $('#cet4 .ad_ticket').focus();
-        return false;
-	} else if (!($id_num == '' || $id_num.length <=0) && reg.test($id_num) === false) {
-        layer.tips('身份证格式错误', '#cet4 .id_num', { time: 2000, tips: [2, '#CB5B5B'] });
-        $('#cet4 .id_num').focus();
-        return false;
-    }
-    // 姓名不能为空
-	if($name == '' || $name.length <= 0) {
-		layer.tips('姓名不能为空', '#cet4 .name', { time: 2000, tips: [2, '#CB5B5B'] });
-        $('#cet4 .name').focus();
-        return false;
-	}
-	return true;
-});
+			// 表单验证
+			$('#cet4').submit(function() {
+				// 获取表单数据
+				var $ad_ticket = $('#cet4 input[name="admission_ticket"]').val(),
+					$id_num = $('#cet4 input[name="id_num"]').val(),
+					$name = $('#cet4 input[name="name"]').val(),
+					reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+				// 准考证号和身份证号不能同时为空，身份证非空时格式验证
+				if(($ad_ticket == '' || $ad_ticket.length <= 0) && ($id_num == '' || $id_num.length <=0)) {
+					layer.tips('准考证和身份证至少填写一项', '#cet4 .ad_ticket', { time: 2000, tips: [2, '#CB5B5B'] });
+			        $('#cet4 .ad_ticket').focus();
+			        return false;
+				} else if (!($id_num == '' || $id_num.length <=0) && reg.test($id_num) === false) {
+			        layer.tips('身份证格式错误', '#cet4 .id_num', { time: 2000, tips: [2, '#CB5B5B'] });
+			        $('#cet4 .id_num').focus();
+			        return false;
+			    }
+			    // 姓名不能为空
+				if($name == '' || $name.length <= 0) {
+					layer.tips('姓名不能为空', '#cet4 .name', { time: 2000, tips: [2, '#CB5B5B'] });
+			        $('#cet4 .name').focus();
+			        return false;
+				}
+				return true;
+			});
 
 			$('#cet6').submit(function() {
 				// 表单验证

@@ -14,9 +14,9 @@ $conn = mysqliInit('localhost', 'root', 'a34991321', 'cfwz');
 if (!empty($_POST['id_num']) && isset($_POST['login'])) {
 	// 进行数据校验
 	$id_num = trim($_POST['id_num']);
-	$id_num = check_input($id_num);
+	// $id_num = check_input($id_num);
 	$password = trim($_POST['password']);
-	$password = check_input($password);
+	// $password = check_input($password);
 	// $autologin = $_POST['autologin'];
 	$sql = "SELECT * FROM `user` WHERE `identity_num` = '{$id_num}' LIMIT 1";
 	$obj = mysqli_query($conn, $sql);
@@ -26,15 +26,6 @@ if (!empty($_POST['id_num']) && isset($_POST['login'])) {
 		// 暂时不验证加密密码
 		// if (createPassword($password) === $result['upassword']) {
 		if ($password === $result['upassword']) {
-			// if (!empty($autologin)) {
-			//如果用户选择了，记录登录状态就把用户名和加了密的密码放到cookie里面
-			// 	setcookie("id_num", $id_num, time() + 60);
-			// 	setcookie("password", $password, time() + 60);
-			// }
-			// $_SESSION['name'] = $result['username'];
-			// $_SESSION['school'] = $result['school'];
-			// $_SESSION['id_num'] = $result['identity_num'];
-
 			// 将用户信息存入SESSION中
 			$_SESSION['user'] = $result;
 			echo "<script>alert('登录成功');window.location.href='index.php'</script>";
@@ -45,8 +36,8 @@ if (!empty($_POST['id_num']) && isset($_POST['login'])) {
 		echo "<script>alert('用户不存在')</script>";
 	}
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -20,13 +20,7 @@ if (isset($_POST['submit'])) {
 		$department = trim($_POST['department']);
 		$school = trim($_POST['school']);
 		$upassword = trim($_POST['upassword']);
-		// if (empty($id_num)) {
-		// 	echo "<script>alert('身份证号不能为空');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
-		// } else if (empty($username)) {
 
-		// } else if (empty($upassword)) {
-
-		// }
 		$sql = "INSERT INTO `user`(`identity_num`, `username`, `cellphone_num`, `department`, `school`, `upassword`) VALUES ('{$id_num}','{$username}','{$tel}','{$department}','{$school}','{$upassword}')";
 		$obj = mysqli_query($conn, $sql);
 		if ($obj) {
@@ -36,7 +30,6 @@ if (isset($_POST['submit'])) {
 			if (mysqli_errno($conn) == 1062) {
 				echo "<script>alert('用户已存在');history.go(-1);</script>";
 			}
-			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	} elseif ($_GET['table'] == 'cet') {
 		$exam_id = trim($_POST['exam_id']);
@@ -58,7 +51,6 @@ if (isset($_POST['submit'])) {
 			if (mysqli_errno($conn) == 1062) {
 				echo "<script>alert('成绩已存在');history.go(-1);</script>";
 			}
-			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	} elseif ($_GET['table'] == 'examination') {
 		$exam_id = trim($_POST['exam_id']);
@@ -75,7 +67,6 @@ if (isset($_POST['submit'])) {
 			if (mysqli_errno($conn) == 1062) {
 				echo "<script>alert('考试类型已存在');history.go(-1);</script>";
 			}
-			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	} elseif ($_GET['table'] == 'administrator') {
 		$admin_id = trim($_POST['admin_id']);
@@ -92,7 +83,6 @@ if (isset($_POST['submit'])) {
 			if (mysqli_errno($conn) == 1062) {
 				echo "<script>alert('管理员已存在');history.go(-1);</script>";
 			}
-			// echo "<script>alert('添加失败');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 		}
 	}
 	mysqli_close($conn);

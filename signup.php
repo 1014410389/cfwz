@@ -17,8 +17,8 @@
 			<nav id="nav">
 				<ul>
 					<li><a href="./index.php" title="index.php">首页</a></li>
-					<li><a href="./query.php" title="成绩查询">成绩查询</a></li>
 					<li class="selected"><a href="./signup.php" title="考试报名">考试报名</a></li>
+					<li><a href="./query.php" title="成绩查询">成绩查询</a></li>
 					<!-- <li><a href="./rank.php" title="考试统计">考试统计</a></li> -->
 					<li><a href="./detail.php" title="成绩详情">成绩详情</a></li>
 					<li><a href="./feedback.php" title="feedback.php">反馈</a></li>
@@ -108,7 +108,7 @@
 								<li><a href="https://www.imooc.com" title="慕课网" target="_blank">慕课网</a></li>
 								<li><a href="https://www.aliyun.com/?utm_campaign=home&utm_medium=images&utm_source=muke&utm_content=m_6598" title="阿里云" target="_blank">阿里云</a></li>
 								<li><a href="https://cloud.tencent.com/?utm_source=youlian&utm_medium=ylsq&utm_campaign=youlian" title="腾讯云" target="_blank">腾讯云</a></li>
-								<li><a href="https://www.zhihu.com/" title="知乎" target="_blank">知乎</a></li>
+								<li><a href="http://www.exam8.com/" title="考试吧" target="_blank">考试吧</a></li>
 								<li><a href="https://mp.weixin.qq.com/cgi-bin/wx" title="微信小程序" target="_blank">微信小程序</a></li>
 								<li><a href="https://www.php-z.com/" title="PHP站中文网" target="_blank">PHP站中文网</a></li>
 								<li><a href="http://www.w3school.com.cn/" title="w3cschool" target="_blank">w3cschool</a></li>

@@ -14,7 +14,6 @@ if (!empty($_POST['admin_id']) && isset($_POST['login'])) {
 	$password = trim($_POST['password']);
 	$password = check_input($conn, $password);
 	$sql = "SELECT * FROM `administrator` WHERE `admin_id` = '{$admin_id}' LIMIT 1";
-	echo $sql;
 	// exit();
 	$obj = mysqli_query($conn, $sql);
 	$result = mysqli_fetch_assoc($obj);
